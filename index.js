@@ -41,8 +41,7 @@ module.exports = opts => {
 
 	function flush(done) {
 		const env = npmRunPath.env({cwd: __dirname});
-		const proc = execa('mocha', files.concat(args), {env});
-
+		const proc = execa('mocha', files.concat(args).concat('--reporter-options=junit_report_path=' + opts.reporterOptions.junit_report_path), {env});
 		proc.then(result => {
 			this.emit('_result', result);
 			done();
